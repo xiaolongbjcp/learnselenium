@@ -10,7 +10,7 @@ import unittest, time, re
 class Ex1Baidu1(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Firefox()
-        self.driver.implicitly_wait(30)
+        # self.driver.implicitly_wait(30)
         self.base_url = "https://www.baidu.com/"
         self.verificationErrors = []
         self.accept_next_alert = True
@@ -30,21 +30,17 @@ class Ex1Baidu1(unittest.TestCase):
         time.sleep(2)
         all_handles = driver.window_handles #获取所有窗口句柄
 
-        handle = all_handles.next()
-        print handle    #输出待选择的窗口句柄
-        driver.switch_to_window(handle)
-        driver.find_element_by_link_text(u"龙争虎斗").click()
 
-        # for handle in all_handles:
+        for handle in all_handles:
 
-        #     if handle != now_handle:
-        #         print handle    #输出待选择的窗口句柄
-        #         driver.switch_to_window(handle)
+            if handle != now_handle:
+                print handle    #输出待选择的窗口句柄
+                driver.switch_to_window(handle)
                 
-        #         driver.find_element_by_link_text(u"龙争虎斗").click()
-        #         time.sleep(5)
-        #         driver.close() #关闭当前窗口
-        # time.sleep(3)
+                driver.find_element_by_link_text(u"龙争虎斗").click()
+                time.sleep(5)
+                driver.close() #关闭当前窗口
+        time.sleep(3)
         print now_handle   #输出主窗口句柄
         
         # driver.find_element_by_link_text(u"剧情简介").click()
