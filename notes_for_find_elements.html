@@ -1,0 +1,136 @@
+查找元素
+
+使用操作如何找到页面元素Webdriver的findElement方法可以用来找到页面的某个元素，最常用的方法是用id和name查找。下面介绍几种比较常用的方法。
+By ID假设页面写成这样：
+<input type=”text” name=”userName”  id=”user” />
+那么可以这样找到页面的元素：
+通过id查找：
+WebElement element = driver.findElement(By.id(“user”));
+By Name或通过name查找：
+WebElement element = driver.findElement(By.name(“userName”));
+By XPATH或通过xpath查找：
+WebElement element =driver.findElement(By.xpath(“//input[@id='user']“));
+By Class Name假设页面写成这样：
+
+<div class=”top”><span>Head</span></div><divclass=”top”><span>HeadName</span></div>
+可以通过这样查找页面元素：
+List<WebElement>top= driver.findElements(By.className(“top”));
+
+By Link Text假设页面元素写成这样：
+<a href=”http://www.baidu.com”>baidu</a>>
+那么可以通过这样查找：
+WebElement baidu=driver.findElement(By.linkText(“baidu”));
+
+输入框传值
+
+输入框（text field or textarea）   找到输入框元素：
+WebElement element = driver.findElement(By.id(“passwd-id”));
+在输入框中输入内容：
+element.sendKeys(“test”);
+将输入框清空：
+element.clear();
+获取输入框的文本内容：
+element.getText();
+
+下拉菜单
+
+下拉选择框(Select)找到下拉选择框的元素：
+Select select = new Select(driver.findElement(By.id(“select”)));
+选择对应的选择项：select.selectByVisibleText(“testName”);
+或
+select.selectByValue(“name”);
+不选择对应的选择项：
+select.deselectAll();
+select.deselectByValue(“name”);
+select.deselectByVisibleText(“姓名”);
+或者获取选择项的值：
+select.getAllSelectedOptions();
+select.getFirstSelectedOption();
+
+单选框
+
+单选项(Radio Button)找到单选框元素：
+WebElement sex=driver.findElement(By.id(“sex”));
+
+选择某个单选项：
+
+sex.click();
+清空某个单选项：
+sex.clear();
+
+判断某个单选项是否已经被选择：
+
+sex.isSelected();
+
+复选框
+
+多选项(checkbox)多选项的操作和单选的差不多：
+WebElement area =driver.findElement(By.id(“area .”));
+area .click();
+area .clear();
+area .isSelected();
+area .isEnabled();
+
+按钮
+
+按钮(button)找到按钮元素：
+WebElement saveButton = driver.findElement(By.id(“save”));
+
+点击按钮：
+
+saveButton.click();
+
+判断按钮是否enable:
+
+saveButton.isEnabled ();
+
+左右选择框也就是左边是可供选择项，选择后移动到右边的框中，反之亦然。例如：
+
+Select name= new Select(driver.findElement(By.id(“name”)));
+name.selectByVisibleText(“hellen”);
+WebElement addName=driver.findElement(By.id(“addButton”));
+addName.click();
+
+弹出框
+
+弹出对话框(Popup dialogs)Alert alert = driver.switchTo().alert();
+alert.accept();
+alert.dismiss();
+alert.getText();
+
+表单提交
+
+表单(Form)Form中的元素的操作和其它的元素操作一样，对元素操作完成后对表单的提交可以：
+WebElement sub= driver.findElement(By.id(“sub”));
+sub.click();
+或
+sub.submit();//只适合于表单的提交
+
+上传附件
+
+上传文件 (Upload File)上传文件的元素操作：
+WebElement picFile = driver.findElement(By.id(“picFile ”));
+String filePath = “d:\\report\\600x600x0.jpg”;
+picFile .sendKeys(filePath);
+
+多窗口切换
+
+Windows 或 Frames之间的切换
+
+首先切换到默认的frame
+driver.switchTo().defaultContent();
+切换到某个frame：
+driver.switchTo().frame(“leftFrame”);
+从一个frame切换到另一个frame：
+driver.switchTo().frame(“mainFrame”);
+切换到某个window：
+driver.switchTo().window(“windowName”);
+
+导航
+
+导航 (Navigationand History)打开一个新的页面：
+driver.navigate().to(“http://www.baidu.com”);
+
+通过历史导航返回原页面：
+driver.navigate().forward();
+driver.navigate().back();
